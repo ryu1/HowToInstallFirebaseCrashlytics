@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import Crashlytics
 
 class ViewController: UIViewController {
-
     
+    var timer: Timer?
+    var time: Int = 3
+    
+    @IBOutlet weak var timeLable: UILabel!
+    
+    @IBOutlet weak var crashButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +24,20 @@ class ViewController: UIViewController {
 
     @IBAction func touchUpInsideCrashButton(_ sender: UIButton) {
         
+        crashButton.isHidden = true
+        timeLable.isHidden = false
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.time -= 1
+            self.timeLable.text = String(self.time)
+            if self.time == 0 {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    Crashlytics.sharedInstance().crash()
+                    
+                })
+            }
+        }
     }
     
 }

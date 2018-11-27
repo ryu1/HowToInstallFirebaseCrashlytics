@@ -1,31 +1,37 @@
-# How To Install Crashlytics
+# How To Install Firebase Crashlytics
+
+Author: Ryuichi.X.Ishitsuka@sony.com
 
 ---
 
-## Firebaseプロジェクト作成手順
+## Firebase Consoleにプロジェクトを作成する
 
-*はじめに、Firebase Console上で、プロジェクトの作成を行います。なお、Firebase Consoleにアクセスするためには、Googleアカウントが必要となりますが、すでに、取得しており、Firebase Consoleにアクセスできるものとします。また、本書では、本項を通して、作成したFirebaseのプロジェクトに、後述のサンプルアプリを登録するという流れを取らせていただきます。*
+Firebase Consoleにログインするためには、Googleアカウントが必要です。
+本項は、Googleアカウントを取得しており、Firebase Consoleにログインしているものといたします。
 
-1. Firebase Consoleを開いて、`Projectの追加`をクリックします
+1. ブラウザで、[Firebase Console](https://console.firebase.google.com)を開き、`Projectの追加`をクリックします。
 
 ![](./Assets/menu-create-project.png)
 
-2. 必要事項を入力して、`プロジェクトを作成`をクリックします
+2. 必要事項を入力して、`プロジェクトを作成`をクリックします。
+
+   本項では、`iem-clashlytics-research`という名前のプロジェクトを作成します。
 
 ![](./Assets/create-project.png)
 
 プロジェクトの作成が完了すると以下のように、当該プロジェクトへのリンクが、メニューに表示されます。
-なお、本項では、`iem-clashlytics-research`という名前のプロジェクトを作成しました。
 
 ![](./Assets/menu-select-project.png)
 
+なお、これ以降は、本項で作成したiem-clashlytics-researchプロジェクト上に、iOS/Androidサンプルアプリのクラッシュレポートを収集していく流れで、説明させていただきます。
+
 ---
 
-## Android版Crashlytics導入手順
+## AndroidアプリにCrashlytics導入する
 
-*本項では、AndroidアプリにCrashlyticsを導入する手順として、[サンプルアプリ](./FirebaseCrashlyticsSampleForAndroid)への導入を通して得た知見を説明します。*
+本項では、AndroidアプリにCrashlyticsを導入する手順を[サンプルアプリ](./FirebaseCrashlyticsSampleForAndroid)を通して説明します。
 
-###アプリにCrashliyticsのライブラリを追加します
+###アプリにCrashliyticsのライブラリを追加する
 
 * build.gradle
 
@@ -118,23 +124,23 @@
 	}
 	```
 
-###Firebase Console上に作成したプロジェクトへアプリを登録します
+###Firebase Console上に作成したプロジェクトにアプリを登録する
 
-当作業は、`Firebase Console > 対象プロジェクト > プロジェクトの設定 > アプリを追加`を開いて行います。	
+当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。	
 ![](./Assets/Android/add-app-button.png)
 
 当画面には、手順も併記されていますので、記載どおりに作業をします。
 また、この作業は、基本的に、Android Package名が変わることがなければ、一度のみ行なえばよいです。
 
-Step 1. 必要事項を入力して`アプリを登録`します
+Step 1. 必要事項を入力して`アプリを登録`します。
 ​	
 ![](./Assets/Android/app-regist.png)
 ​	
-Step 2. google-services-jsonファイルを取得して、Androidプロジェクトに配置します
+Step 2. google-services-jsonファイルを取得して、Androidプロジェクトに配置します。
 
 ![](./Assets/Android/download-google-services-json.png)
 
-Step 3. Firebase SDKは追加済みなので先へ進みます
+Step 3. Firebase SDKは追加済みなので先へ進みます。
 
 ![](./Assets/Android/add-facebook-sdk.png)
 
@@ -148,15 +154,15 @@ Step 4. 初期状態では、Waitingしていますので、Android Studio上で
 
 ![](./Assets/Android/complete-start-app.png)
 
-###Firebase Console上で、Crashlyticsの設定をします
+###Firebase Console上でCrashlyticsの設定する
 
-当作業は、`Firebase Console > 対象プロジェクト > 左メニューのClashlytics`を開いて行います。
+当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > 左メニューのClashlytics`を開いて行います。
 
-Step 1. `このアプリではCrashlyticsを初めて使用します`を選択します
+Step 1. `このアプリではCrashlyticsを初めて使用します`を選択します。
 ​	
 ![](./Assets/Android/Crashlytics-Step1.png)
 ​	
-Step 2. すでに、SDKをインストール済みなので、Step 2は、スキップします
+Step 2. すでに、SDKをインストール済みなので、Step 2は、スキップします。
 ​	
 ![](./Assets/Android/Crashlytics-Step2.png)
 ​	
@@ -168,9 +174,9 @@ Step 3. Android Studio上で、アプリをRunします。
 ​	
 ![](./Assets/Android/Crashlytics-complete.png)
 
-###Crashレポートの送信されるか確認します
+###Crashレポートが送信されるか確認する
 
-1. 強制的にクラッシュを引き起こすコードをアプリの任意のソースに追加します
+1. 強制的にクラッシュを引き起こすコードをアプリの任意のソースに追加します。
 	
 	```
 	package com.sips.firebase.crashlytics.sample.firebasecrashlyticssample;
@@ -198,40 +204,163 @@ Step 3. Android Studio上で、アプリをRunします。
 	
 	```
 	
-2. アプリをRunし、クラッシュを引き起こすコードが実行されるよう操作します
+2. アプリをRunし、クラッシュを引き起こすコードが実行されるよう操作します。
 
-3. `Firebase Console > 対象プロジェクト > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します
+3. `Firebase Console > 対象プロジェクト(iem-clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します。
 
 ![](./Assets/Android/crash-report.png)
 
-###Tips & Tricks
-
-* Debug時は、Crashレポートを収集したくない
-
-	[https://qiita.com/YusukeIwaki/items/e767c45edad48302cec8](https://qiita.com/YusukeIwaki/items/e767c45edad48302cec8)
-
 ---
 
-## iOS版Crashlytics導入手順
+## iOSアプリにCrashlyticsを導入する
 
-*本項では、iOSアプリにCrashlyticsを導入する手順として、[サンプルアプリ](./FirebaseCrashlyticsSampleForIOS)への導入を通して得た知見を説明します。*
+本項では、iOSアプリにCrashlyticsを導入する手順を[サンプルアプリ](./FirebaseCrashlyticsSampleForIOS)を通して説明します。
 
-###アプリにCrashliyticsのライブラリを追加します
+###アプリにCrashliyticsのライブラリを追加する
 
-* Cocoapods
+* CocoaPods
 
-  ```
-  pod 'Firebase/Core'
-  ```
+  * Podfileに以下を追加します。
+
+    ```
+    pod 'Firebase/Core'
+    pod 'Fabric', '~> 1.7.11'
+    pod 'Crashlytics', '~> 3.10.7'
+    ```
+
+  * Xcodeの`Run Script`に以下を追加します。
+
+    ```
+    ${PODS_ROOT}/Fabric/run
+    ```
 
 * Carthage
 
+  * Cartfileに以下を追加します。
+
+    ```
+    binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" == 5.13.0
+    binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
+    binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
+    ```
+
+  * `carthage update --platform iOS`で取得した`.framework`を`Linked Frameworks and Libraries`に追加します。
+
+    （`/usr/local/bin/carthage copy-frameworks`の`Run Script`には追加しないようにしてください。）
+
+    ![](./Assets/iOS/Linked-Frameworks-and-Libraries.png)
+
+  * Xcodeの`Run Script`に以下を追加します。
+
+    ```
+    $SRCROOT/Carthage/Build/iOS/Fabric.framework/run
+    ```
+
+* CocoaPods/Carthage、いずれの場合も、追加した`Run Script`の`Input Files`に以下を追加します。(Xcode 10 Only)
+
   ```
-  binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
+  $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
   ```
 
+* 対象アプリのXcodeの`Build Settings`を以下のとおり変更します。
+  * `Debug Infomation Format`を`DWARF with dSYM File`に変更します。
+  *  `Other Linker Flags`に`-ObjC`を追加します。
 
+### Firebase Console上に作成したプロジェクトにアプリを登録する
 
-##Reference
+Androidアプリと同様に、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。この作業は、アプリのバンドルIDが変わることがなければ場合は、一度のみ行えばよいです。
+
+Step 1. 必要事項を入力して`アプリを登録`します。
+
+![](./Assets/iOS/Add-App-Step1.png)
+
+Step 2. google-services-jsonファイルを取得して、アプリのXcodeプロジェクトに配置します。
+
+![](./Assets/iOS/Add-App-Step2.png)
+
+Step 3. Firebase SDKは追加済みなので先へ進みます。
+
+![](./Assets/iOS/Add-App-Step3.png)
+
+Step 4. 初期化コードをアプリに追加します。
+
+![](./Assets/iOS/Add-App-Step4.png)
+
+Step 5. Xcode上で、アプリをRunします。
+
+アプリが起動されたら、Waitingが解除され、以下のようなメッセージが表示されます。
+切り替わらない場合は、複数回、アプリを起動し直してください。
+（インターネットに接続できる環境でアプリを起動する必要があります。）
+
+![](./Assets/iOS/Add-App-Step5.png)
+
+### Firebase Console上でCrashlyticsの設定する
+
+Androidアプリと同様に、当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > 左メニューのClashlytics`を開いて行います。
+
+Step 1. `このアプリではCrashlyticsを初めて使用します`を選択します。
+
+![](./Assets/iOS/Crashlytics-Step1.png)
+
+Step 2. すでに、SDKをインストール済みなので、Step 2は、スキップします。
+
+Step 3. Xcode上で、アプリをRunします。
+
+![](./Assets/iOS/Crashlytics-Step3.png)
+
+完了すると以下のような画面が表示されます。
+
+![](./Assets/iOS/Crashlytics-Step-Complete.png)
+
+### Crashレポートが送信されるか確認する
+
+1. 強制的にクラッシュを引き起こすコードをアプリの任意のソースに追加します。
+
+```swift
+import UIKit
++ import Crashlytics
+
+class ViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    @IBAction func touchUpInsideCrashButton(_ sender: UIButton) {
++        Crashlytics.sharedInstance().crash()
+    }
+    
+}
+```
+
+2. アプリをRunし、クラッシュを引き起こすコードが実行されるよう操作します。
+
+3. `Firebase Console > 対象プロジェクト(iem-clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します
+
+   ![](./Assets/iOS/Crashlytics-Dashboard.png)
+
+4. CrashlyticsのDashboardに、dSYMが不足している旨のメッセージが表示され、クラッシュレポートが表示されない場合は、
+
+   ![](./Assets/iOS/Crashlytics-Need-dSYM.png)
+
+   別途、以下の画面から、dSYMをアップロードしてください。
+
+   （プロキシ環境等によって、アップロードに失敗することがあります）
+
+   ![](./Assets/iOS/Crashlytics-Upload-Need-dSYM.png)
+
+##References
 
 [https://firebase.google.com/docs/crashlytics/?authuser=1](https://firebase.google.com/docs/crashlytics/?authuser=1)
+
+[https://github.com/firebase/firebase-ios-sdk](https://github.com/firebase/firebase-ios-sdk)
+
+## Tips & Tricks
+
+- Debug時は、Crashレポートを収集したくない。
+
+  [https://qiita.com/YusukeIwaki/items/e767c45edad48302cec8](https://qiita.com/YusukeIwaki/items/e767c45edad48302cec8)
+
+  https://qiita.com/yimajo/items/98cbf5bdbc098c683657
+
+  https://qiita.com/Takumi_Mori/items/df840e90ac685d9ce654
