@@ -1,6 +1,6 @@
 # How To Install Firebase Crashlytics
 
-Author: Ryuichi.X.Ishitsuka@sony.com
+Author: Ryuichi.Ishitsuka
 
 ---
 
@@ -15,7 +15,7 @@ Firebase Consoleにログインするためには、Googleアカウントが必�
 
 2. 必要事項を入力して、`プロジェクトを作成`をクリックします。
 
-   本項では、`iem-clashlytics-research`という名前のプロジェクトを作成します。
+   本項では、`clashlytics-research`という名前のプロジェクトを作成します。
 
 ![](./Assets/create-project.png)
 
@@ -23,7 +23,7 @@ Firebase Consoleにログインするためには、Googleアカウントが必�
 
 ![](./Assets/menu-select-project.png)
 
-なお、これ以降は、本項で作成したiem-clashlytics-researchプロジェクト上に、iOS/Androidサンプルアプリのクラッシュレポートを収集していく流れで、説明させていただきます。
+なお、これ以降は、本項で作成したclashlytics-researchプロジェクト上に、iOS/Androidサンプルアプリのクラッシュレポートを収集していく流れで、説明させていただきます。
 
 ---
 
@@ -92,7 +92,7 @@ Firebase Consoleにログインするためには、Googleアカウントが必�
 	android {
 	    compileSdkVersion 28
 	    defaultConfig {
-	        applicationId "com.sips.firebase.crashlytics.sample.firebasecrashlyticssample"
+	        applicationId "com.xxx.firebase.crashlytics.sample.firebasecrashlyticssample"
 	        minSdkVersion 22
 	        targetSdkVersion 28
 	        versionCode 1
@@ -126,7 +126,7 @@ Firebase Consoleにログインするためには、Googleアカウントが必�
 
 ###Firebase Console上に作成したプロジェクトにアプリを登録する
 
-当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。	
+当作業は、`Firebase Console > 対象プロジェクト(clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。	
 ![](./Assets/Android/add-app-button.png)
 
 当画面には、手順も併記されていますので、記載どおりに作業をします。
@@ -136,7 +136,7 @@ Step 1. 必要事項を入力して`アプリを登録`します。
 ​	
 ![](./Assets/Android/app-regist.png)
 ​	
-Step 2. google-services-jsonファイルを取得して、Androidプロジェクトに配置します。
+Step 2. google-services-jsonファイルを取得して、Androidプロジェクトに配置(配置箇所は以下を参照)します。
 
 ![](./Assets/Android/download-google-services-json.png)
 
@@ -156,7 +156,7 @@ Step 4. 初期状態では、Waitingしていますので、Android Studio上で
 
 ###Firebase Console上でCrashlyticsの設定する
 
-当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > 左メニューのClashlytics`を開いて行います。
+当作業は、`Firebase Console > 対象プロジェクト(clashlytics-research) > 左メニューのClashlytics`を開いて行います。
 
 Step 1. `このアプリではCrashlyticsを初めて使用します`を選択します。
 ​	
@@ -179,7 +179,7 @@ Step 3. Android Studio上で、アプリをRunします。
 1. 強制的にクラッシュを引き起こすコードをアプリの任意のソースに追加します。
 	
 	```
-	package com.sips.firebase.crashlytics.sample.firebasecrashlyticssample;
+	package com.xxx.firebase.crashlytics.sample.firebasecrashlyticssample;
 	
 	import android.support.v7.app.AppCompatActivity;
 	import android.os.Bundle;
@@ -206,7 +206,7 @@ Step 3. Android Studio上で、アプリをRunします。
 	
 2. アプリをRunし、クラッシュを引き起こすコードが実行されるよう操作します。
 
-3. `Firebase Console > 対象プロジェクト(iem-clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します。
+3. `Firebase Console > 対象プロジェクト(clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します。
 
 ![](./Assets/Android/crash-report.png)
 
@@ -268,13 +268,13 @@ Step 3. Android Studio上で、アプリをRunします。
 
 ### Firebase Console上に作成したプロジェクトにアプリを登録する
 
-Androidアプリと同様に、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。この作業は、アプリのバンドルIDが変わることがなければ場合は、一度のみ行えばよいです。
+Androidアプリと同様に、`Firebase Console > 対象プロジェクト(clashlytics-research) > プロジェクトの設定 > アプリを追加`を開いて行います。この作業は、アプリのバンドルIDが変わることがなければ場合は、一度のみ行えばよいです。
 
 Step 1. 必要事項を入力して`アプリを登録`します。
 
 ![](./Assets/iOS/Add-App-Step1.png)
 
-Step 2. google-services-jsonファイルを取得して、アプリのXcodeプロジェクトに配置します。
+Step 2. GoogleService-Info.plistファイルを取得して、アプリのXcodeプロジェクト（配置場所は以下の画像を参照）に配置します。
 
 ![](./Assets/iOS/Add-App-Step2.png)
 
@@ -296,7 +296,7 @@ Step 5. Xcode上で、アプリをRunします。
 
 ### Firebase Console上でCrashlyticsの設定する
 
-Androidアプリと同様に、当作業は、`Firebase Console > 対象プロジェクト(iem-clashlytics-research) > 左メニューのClashlytics`を開いて行います。
+Androidアプリと同様に、当作業は、`Firebase Console > 対象プロジェクト(clashlytics-research) > 左メニューのClashlytics`を開いて行います。
 
 Step 1. `このアプリではCrashlyticsを初めて使用します`を選択します。
 
@@ -335,7 +335,7 @@ class ViewController: UIViewController {
 
 2. アプリをRunし、クラッシュを引き起こすコードが実行されるよう操作します。
 
-3. `Firebase Console > 対象プロジェクト(iem-clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します
+3. `Firebase Console > 対象プロジェクト(clashlytics-research) > Clashlytics > 対象アプリ`を開いて、Crashレポートがアップロードされていることを確認します
 
    ![](./Assets/iOS/Crashlytics-Dashboard.png)
 
@@ -364,3 +364,6 @@ class ViewController: UIViewController {
   https://qiita.com/yimajo/items/98cbf5bdbc098c683657
 
   https://qiita.com/Takumi_Mori/items/df840e90ac685d9ce654
+
+- 一つのアプリ内に複数のFirebaseプロジェクトを混在させるには
+https://firebase.google.com/docs/configure/?hl=ja
