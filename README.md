@@ -1,6 +1,5 @@
 # How To Install Firebase Crashlytics
 
-Author: Ryuichi.Ishitsuka
 
 ---
 
